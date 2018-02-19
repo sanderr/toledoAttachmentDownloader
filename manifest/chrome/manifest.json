@@ -12,6 +12,7 @@
 		"default_popup": "src/popup/popup.html"
 	},
 	"permissions": [
-		"activeTab"
+		"activeTab",
+		"https://p.cygnus.cc.kuleuven.be/"
 	]
 }
