@@ -2,7 +2,7 @@ window.onload = () => {
 
 	const zip = new JSZip();
 
-	Page.getResourceGroups((groups) => {
+	Page.getResourceGroups().then((groups) => {
 		const promises = groups.map((group) => {
 			const groupPromises = group.resources.map((resource) => {
 				return Downloader.downloadResource(resource.url).then((buffer) => {
