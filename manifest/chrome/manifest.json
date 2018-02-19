@@ -1,0 +1,17 @@
+{
+	"manifest_version": 2,
+
+	"name": "Toledo Attachment Downloader",
+	"description": "Download all attachments on a single course page in one go.",
+	"version": "0.1",
+
+	"author": "Sander Van Balen",
+
+	"browser_action": {
+		"default_icon": "assets/icon.png",
+		"default_popup": "src/popup/popup.html"
+	},
+	"permissions": [
+		"activeTab"
+	]
+}
