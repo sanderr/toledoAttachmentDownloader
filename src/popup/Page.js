@@ -10,7 +10,7 @@ const Page = (() => {
 		});
 	};
 
-	const _getUnsafeResourceGroups = (callback) => {
+	const _getUnsafeResourceGroups = () => {
 		return _executeScript(() => {
 			const baseUrl = window.document.baseURI.replace(/((https:\/\/)?[^/]*)\/.*/g, "$1")
 			const result = [];
@@ -35,7 +35,7 @@ const Page = (() => {
 		});
 	};
 
-	const _getResourceGroups = (callback) => {
+	const _getResourceGroups = () => {
 		return new Promise((resolve, reject) => {
 			_getUnsafeResourceGroups().then((groups) => {
 				const result = [];
