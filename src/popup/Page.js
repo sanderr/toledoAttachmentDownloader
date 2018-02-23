@@ -5,6 +5,10 @@ const Page = (() => {
 			chrome.tabs.executeScript({
 				code: "(" + fn + ")();"
 			}, (results) => {
+				if (chrome.runtime.lastError || ! results || results.length === 0) {
+					reject("Something went wrong.");
+					return;
+				}
 				resolve(results[0]);
 			});
 		});
@@ -53,6 +57,8 @@ const Page = (() => {
 					result.push(groupObject);
 				});
 				resolve(result);
+			}).catch((err) => {
+				reject(err);
 			});
 		});
 	};

@@ -10,6 +10,10 @@ window.onload = () => {
 		$("#info").hide();
 	};
 
+	const showWarning = (warning) => {
+		document.querySelector("#menu").innerHTML = "<p>" + warning + "</p>";
+	};
+
 	const downloadZip = (files) => {
 		showInfo("Downloading... This might take a while.");
 		Downloader.downloadFiles(files, "toledo").then(() => {
@@ -44,7 +48,7 @@ window.onload = () => {
 
 	Page.getResourceGroups().then((groups) => {
 		if (groups.length === 0) {
-			document.querySelector("#menu").innerHTML = "<p>WARNING: No resources found on this page.</p>";
+			showWarning("No resources found on this page.");
 			return;
 		}
 		// generate tree
@@ -97,6 +101,8 @@ window.onload = () => {
 			downloadZip(files);
 		};
 
-	}); //Page.getResourceGroups().then()
+	}).catch((err) => {
+		showWarning(err);
+	});
 
 } //window.onload()
