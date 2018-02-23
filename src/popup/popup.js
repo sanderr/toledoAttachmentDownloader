@@ -51,7 +51,6 @@ window.onload = () => {
 			showWarning("No resources found on this page.");
 			return;
 		}
-		// generate tree
 		$("#tree").jstree({
 			plugins : [ "checkbox" ],
 			core: {
@@ -65,6 +64,7 @@ window.onload = () => {
 					},
 					children: toTreeItems(groups)
 				}],
+				worker: false,
 				themes: {
 					icons: false
 				}
