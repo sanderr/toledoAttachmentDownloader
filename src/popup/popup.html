@@ -1,8 +1,14 @@
 <html>
 	<head>
 		<title>Toledo Attachment Downloader</title>
+
+		<link rel="stylesheet" type="text/css" href="popup.css">
+
 		<script src="lib/jszip/FileSaver.js"></script>
+		<script src="lib/jquery/jquery-3.3.1.min.js"></script>
 		<script src="lib/jszip/jszip.min.js"></script>
+		<script src="lib/jstree/jstree.min.js"></script>
+		<link rel="stylesheet" href="lib/jstree/themes/default/style.min.css"/>
 
 		<script src="Util.js"></script>
 		<script src="Page.js"></script>
@@ -10,6 +16,21 @@
 		<script src="popup.js"></script>
 	</head>
 	<body>
+		<div id="menu">
+			<ul class="list-no-marks">
+				<li>
+					<button type="button" id="button-download-all">Download all</button>
+				</li>
+				<li>
+					<button type="button" id="button-download-selected">Download selected</button>
+				</li>
+			</ul>
+			<p id="info" hidden="hidden"></p>
+			<div id="tree">
+			</div>
+		</div>
+		<!--
 		<p>Please wait until the download window opens. If this page has a lot of resources, this might take a while...</p>
+		-->
 	</body>
 </html>
