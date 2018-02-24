@@ -14,6 +14,16 @@ const Page = (() => {
 		});
 	};
 
+	const _getPageTitle = () => {
+		return new Promise((resolve, reject) => {
+			const result = _executeScript(() => {
+				const pageTitle = document.querySelector("#pageTitleText").firstElementChild.innerHTML;
+				return pageTitle;
+			});
+		resolve(result);
+		});
+	};
+
 	const _getUnsafeResourceGroups = () => {
 		return _executeScript(() => {
 			const baseUrl = window.document.baseURI.replace(/((https:\/\/)?[^/]*)\/.*/g, "$1")
@@ -84,6 +94,14 @@ const Page = (() => {
 		 */
 		getResourceGroups() {
 			return _getResourceGroups();
+		},
+		/**
+		 * Returns the page title
+		 * @return {Promise} Promise with value the page title
+		 * @return {String} string Page title.
+		 */
+		getPageTitle() {
+			return _getPageTitle();
 		}
 	}; //return
 

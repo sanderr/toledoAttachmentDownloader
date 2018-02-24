@@ -15,10 +15,15 @@ window.onload = () => {
 	};
 
 	const downloadZip = (files) => {
+		const _downloadZip = (pageTitle) => {
+			Downloader.downloadFiles(files, pageTitle).then(() => {
+				clearInfo();
+			});
+		};
+
 		showInfo("Downloading... This might take a while.");
-		Downloader.downloadFiles(files, "toledo").then(() => {
-			clearInfo();
-		});
+		Page.getPageTitle().then((title) => _downloadZip(title))
+						   .catch((err) => _downloadZip("toledo"));
 	};
 
 	const toTreeItems = (groups) => {
