@@ -32,9 +32,6 @@ const Downloader = (() => {
 	};
 
 	return {
-		getDom(url) {
-			return _getDom(url);
-		},
 		downloadResource(url) {
 			return _downloadResource(url);
 		},
@@ -45,6 +42,7 @@ const Downloader = (() => {
 		 * @param {String} files[].group The name of the group this file belongs to.
 		 * @param {String} files[].url The url this file can be downloaded from.
 		 * @param {String} zipName The name of the zip file that will be downloaded.
+		 * @return {Promise} A promise resolving when the download is finished.
 		 */
 		downloadFiles(files, zipName) {
 			return _downloadFiles(files, zipName);
