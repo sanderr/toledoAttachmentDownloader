@@ -4,7 +4,7 @@
 	"name": "KULeuven Toledo Attachment Downloader",
 	"short_name": "Toledo Downloader",
 	"description": "Unofficial extension. Download all attachments on a single course page in one go.",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"author": "Sander Van Balen",
 	"icons": {
 		"128": "assets/128x128.png"
