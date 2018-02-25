@@ -29,8 +29,14 @@ const Page = (() => {
 			const baseUrl = window.document.baseURI.replace(/((https:\/\/)?[^/]*)\/.*/g, "$1")
 			const result = [];
 			const groups = document.querySelector("#content_listContainer").children;
-			groups.forEach((group) => {
-				const groupName = group.querySelector("span[style]").innerText;
+			for (let i = 0; i < groups.length; i++) {
+				const group = groups[i];
+				console.log(group);
+				let groupNameElement = group.querySelector(".item span[style]");
+				if (! groupNameElement) {
+					groupNameElement = group.querySelector(".item a");
+				}
+				let groupName = groupNameElement ? groupNameElement.innerText : "unknown";
 				const resources = group.querySelectorAll(".details .detailsValue ul.attachments > li > a");
 				const groupObject = {
 					groupName: groupName,
@@ -44,7 +50,7 @@ const Page = (() => {
 					});
 				});
 				result.push(groupObject);
-			});
+			};
 			return result;
 		});
 	};
