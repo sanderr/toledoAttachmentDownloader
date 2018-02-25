@@ -44,7 +44,7 @@ const Page = (() => {
 					});
 				});
 				result.push(groupObject);
-			};
+			});
 			return result;
 		});
 	};
