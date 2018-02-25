@@ -5,9 +5,7 @@ The current version does not go into subdirectories.
 
 ## Installation
 ### Firefox
-To install in Firefox, download the latest signed extension from bin/firefox/. Then, in Firefox, go to about:addons, click on the gear
-icon in the top right corner of the page and select "Install Add-on From File...". Select the xpi file you downloaded earlier, and you're good to go.
-You can remove the xpi file now if you want.
+The add-on is available at https://addons.mozilla.org/en-US/firefox/addon/kul-toledo-attachment-download/
 
 ### Chrome
 Because Chrome requires a developer signup fee to publish extensions, I have not published it there. This will make the
