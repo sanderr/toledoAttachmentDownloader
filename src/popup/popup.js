@@ -23,7 +23,7 @@ window.onload = () => {
 
 		showInfo("Downloading... This might take a while.");
 		Page.getPageTitle().then((title) => _downloadZip(title))
-						   .catch((err) => _downloadZip("toledo"));
+			.catch((err) => _downloadZip("toledo"));
 	};
 
 	const toTreeItems = (groups) => {

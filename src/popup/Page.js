@@ -20,7 +20,7 @@ const Page = (() => {
 				const pageTitle = document.querySelector("#pageTitleText").firstElementChild.innerHTML;
 				return pageTitle;
 			});
-		resolve(result);
+			resolve(result);
 		});
 	};
 
@@ -29,8 +29,7 @@ const Page = (() => {
 			const baseUrl = window.document.baseURI.replace(/((https:\/\/)?[^/]*)\/.*/g, "$1")
 			const result = [];
 			const groups = document.querySelector("#content_listContainer").children;
-			for (var i = 0; i < groups.length; i++) {
-				const group = groups[i];
+			groups.forEach((group) => {
 				const groupName = group.querySelector("span[style]").innerText;
 				const resources = group.querySelectorAll(".details .detailsValue ul.attachments > li > a");
 				const groupObject = {
