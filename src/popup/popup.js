@@ -91,7 +91,7 @@ window.onload = () => {
 		const buttonsAll = $("#button-download-all");
 		const buttonsSelected = $("#button-download-selected");
 
-		buttonsAll.onclick = () => {
+		buttonsAll.click(() => {
 			const files = [];
 			groups.forEach((group) => {
 				group.resources.forEach((resource) => {
@@ -103,15 +103,15 @@ window.onload = () => {
 				});
 			});
 			downloadZip(files);
-		};
+		});
 
-		buttonsSelected.onclick = () => {
+		buttonsSelected.click(() => {
 			const selected = $("#tree").jstree("get_bottom_selected", true);
 			const files = selected.map((treeItem) => {
 				return treeItem.data;
 			});
 			downloadZip(files);
-		};
+		});
 
 		buttonsAll.show();
 		buttonsSelected.show();
