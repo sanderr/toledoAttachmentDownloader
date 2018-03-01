@@ -14,6 +14,15 @@
 		"default_icon": "assets/128x128.png",
 		"default_popup": "src/popup/popup.html"
 	},
+	"content_scripts": [
+		{
+			"matches": ["https://p.cygnus.cc.kuleuven.be/*"],
+			"js": [
+				"src/content/Page.js",
+				"src/content/content.js"
+			]
+		}
+	],
 	"permissions": [
 		"activeTab",
 		"https://p.cygnus.cc.kuleuven.be/"

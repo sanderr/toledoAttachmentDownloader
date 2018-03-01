@@ -25,34 +25,7 @@ const Page = (() => {
 	};
 
 	const _getUnsafeResourceGroups = () => {
-		return _executeScript(() => {
-			const baseUrl = window.document.baseURI.replace(/((https:\/\/)?[^/]*)\/.*/g, "$1")
-			const result = [];
-			const groups = document.querySelector("#content_listContainer").children;
-			for (let i = 0; i < groups.length; i++) {
-				const group = groups[i];
-				console.log(group);
-				let groupNameElement = group.querySelector(".item span[style]");
-				if (! groupNameElement) {
-					groupNameElement = group.querySelector(".item a");
-				}
-				let groupName = groupNameElement ? groupNameElement.innerText : "unknown";
-				const resources = group.querySelectorAll(".details .detailsValue ul.attachments > li > a");
-				const groupObject = {
-					groupName: groupName,
-					resources: []
-				};
-				resources.forEach((resource) => {
-					const url = resource.href.match(/^https?:\/\//) ? resource.href : baseUrl + resource.href.replace(/^\/?/, "/");
-					groupObject.resources.push({
-						name: resource.innerText,
-						url: url
-					});
-				});
-				result.push(groupObject);
-			};
-			return result;
-		});
+		//TODO: send message and listen for response
 	};
 
 	const _getResourceGroups = () => {
