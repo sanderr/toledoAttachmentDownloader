@@ -25,27 +25,39 @@ const Page = (() => {
 	};
 
 	const _getUnsafeResourceGroups = () => {
-		//TODO: send message and listen for response
+		return new Promise((resolve, reject) => {
+			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+				chrome.tabs.sendMessage(tabs[0].id, { action: "getGroups" }, (response) => {
+					resolve(response);
+				});  
+			});
+		});
 	};
 
 	const _getResourceGroups = () => {
 		return new Promise((resolve, reject) => {
 			_getUnsafeResourceGroups().then((groups) => {
-				const result = [];
-				groups.forEach((group) => {
-					const groupObject = {
-						groupName: Util.convertFilenameSafe(group.groupName),
-						resources: []
-					};
-					group.resources.forEach((resource) => {
-						groupObject.resources.push({
-							name: Util.convertFilenameSafe(resource.name),
-							url: resource.url
+				const transform = (groups) => {
+					const result = [];
+					groups.forEach((group) => {
+						const groupObject = {
+							groupName: Util.convertFilenameSafe(group.groupName),
+							resources: []
+						};
+						group.resources.forEach((resource) => {
+							groupObject.resources.push({
+								name: Util.convertFilenameSafe(resource.name),
+								url: resource.url
+							});
 						});
+						if (group.subGroups) {
+							groupObject.subGroups = transform(group.subGroups);
+						}
+						result.push(groupObject);
 					});
-					result.push(groupObject);
-				});
-				resolve(result);
+					return result;
+				};
+				resolve(transform(groups));
 			}).catch((err) => {
 				reject(err);
 			});
@@ -69,6 +81,7 @@ const Page = (() => {
 		 * @return {String} list[].resources Resources belonging to the group.
 		 * @return {String} list[].resources[].name Name of the resource.
 		 * @return {String} list[].resources[].url Absolute url of this resource.
+		 * @return {Object} [list[].subGroup] Subgroup for this group.
 		 */
 		getResourceGroups() {
 			return _getResourceGroups();

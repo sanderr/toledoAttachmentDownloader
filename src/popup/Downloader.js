@@ -19,7 +19,7 @@ const Downloader = (() => {
 			const zip = new JSZip();
 			const promises = files.map((file) => {
 				return _downloadResource(file.url).then((buffer) => {
-					zip.file(file.group + "/" + file.name, buffer, { binary: true });
+					zip.file(file.path + "/" + file.name, buffer, { binary: true });
 				});
 			});
 			Promise.all(promises).then(() => {

@@ -26,7 +26,7 @@ window.onload = () => {
 			.catch((err) => _downloadZip("toledo"));
 	};
 
-	const toTreeItems = (groups) => {
+	const toTreeItems = (groups, pathAccumulator) => {
 		const items = [];
 		groups.forEach((group) => {
 			const children = [];
@@ -35,11 +35,16 @@ window.onload = () => {
 					text: resource.name,
 					data: {
 						name: resource.name,
-						group: group.groupName,
+						path: pathAccumulator ? pathAccumulator + "/" + group.groupName : group.groupName,
 						url: resource.url
 					}
 				});
 			});
+			if (group.subGroups) {
+				toTreeItems(group.subGroups, group.groupName).forEach((subGroup) => {
+					children.push(subGroup);
+				});
+			}
 			if (children.length === 0) {
 				return;
 			}

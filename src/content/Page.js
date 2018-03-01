@@ -12,13 +12,14 @@ const Page = (() => {
 		return group.querySelectorAll(".details .detailsValue ul.attachments > li > a");
 	};
 
-	const _getSubGroup = (group) => {
+	const _getSubGroups = (group) => {
 		return new Promise((resolve, reject) => {
-			const subGroup = group.querySelector(".item a");
-			if (! subGroup) {
+			const subDir = group.querySelector(".item a");
+			if (! subDir) {
 				reject();
 				return;
 			}
+			const url = subDir.href;
 			const xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = () => { 
 				if (xhr.readyState === 4 && xhr.status === 200) {
@@ -65,8 +66,8 @@ const Page = (() => {
 							url: url
 						});
 					});
-					_getSubGroup(group).then((subGroup) => {
-						groupObject.subGroup = subGroup;
+					_getSubGroups(group).then((subGroups) => {
+						groupObject.subGroups = subGroups;
 						res(groupObject);
 					}).catch((err) => {
 						res(groupObject);
@@ -89,7 +90,7 @@ const Page = (() => {
 		 * @return {String} list[].resources Resources belonging to the group.
 		 * @return {String} list[].resources[].name Name of the resource.
 		 * @return {String} list[].resources[].url Absolute url of this resource.
-		 * @return {String} [list[].subGroup] Subgroup for this group.
+		 * @return {Object} [list[].subGroup] Subgroup for this group.
 		 */
 		getGroups(doc) {
 			return _getGroups(doc);
