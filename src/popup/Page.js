@@ -28,6 +28,10 @@ const Page = (() => {
 		return new Promise((resolve, reject) => {
 			chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 				chrome.tabs.sendMessage(tabs[0].id, { action: "getGroups" }, (response) => {
+					if (! response) {
+						resolve([]);
+						return;
+					}
 					resolve(response);
 				});  
 			});

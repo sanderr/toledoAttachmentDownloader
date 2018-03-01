@@ -16,7 +16,7 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://p.cygnus.cc.kuleuven.be/*"],
+			"matches": ["https://*/*/blackboard/*"],
 			"js": [
 				"src/content/Page.js",
 				"src/content/content.js"
