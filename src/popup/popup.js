@@ -56,7 +56,9 @@ window.onload = () => {
 		return items;
 	};
 
+	showInfo("Please wait a moment...");
 	Page.getResourceGroups().then((groups) => {
+		clearInfo();
 		if (groups.length === 0) {
 			showWarning("No resources found on this page.");
 			return;
@@ -86,8 +88,8 @@ window.onload = () => {
 		 * Buttons
 		 */
 
-		const buttonsAll = document.querySelector("#button-download-all");
-		const buttonsSelected = document.querySelector("#button-download-selected");
+		const buttonsAll = $("#button-download-all");
+		const buttonsSelected = $("#button-download-selected");
 
 		buttonsAll.onclick = () => {
 			const files = [];
@@ -110,6 +112,9 @@ window.onload = () => {
 			});
 			downloadZip(files);
 		};
+
+		buttonsAll.show();
+		buttonsSelected.show();
 
 	}).catch((err) => {
 		showWarning(err);
