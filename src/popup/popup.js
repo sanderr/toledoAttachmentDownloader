@@ -42,7 +42,9 @@ window.onload = () => {
 			});
 			if (group.subGroups) {
 				toTreeItems(group.subGroups, group.groupName).forEach((subGroup) => {
-					children.push(subGroup);
+					if (subGroup.children.length > 0) {
+						children.push(subGroup);
+					}
 				});
 			}
 			if (children.length === 0) {
@@ -59,7 +61,8 @@ window.onload = () => {
 	showInfo("Please wait a moment...");
 	Page.getResourceGroups().then((groups) => {
 		clearInfo();
-		if (groups.length === 0) {
+		const items = toTreeItems(groups);
+		if (items.length === 0) {
 			showWarning("No resources found on this page.");
 			return;
 		}
@@ -74,7 +77,7 @@ window.onload = () => {
 						opened : true,
 						selected : true
 					},
-					children: toTreeItems(groups)
+					children: items
 				}],
 				worker: false,
 				themes: {
@@ -88,24 +91,9 @@ window.onload = () => {
 		 * Buttons
 		 */
 
-		const buttonsAll = $("#button-download-all");
-		const buttonsSelected = $("#button-download-selected");
+		const downloadButton = $("#button-download-selected");
 
-		buttonsAll.click(() => {
-			const files = [];
-			groups.forEach((group) => {
-				group.resources.forEach((resource) => {
-					files.push({
-						name: resource.name,
-						group: group.groupName,
-						url: resource.url
-					});
-				});
-			});
-			downloadZip(files);
-		});
-
-		buttonsSelected.click(() => {
+		downloadButton.click(() => {
 			const selected = $("#tree").jstree("get_bottom_selected", true);
 			const files = selected.map((treeItem) => {
 				return treeItem.data;
@@ -113,8 +101,7 @@ window.onload = () => {
 			downloadZip(files);
 		});
 
-		buttonsAll.show();
-		buttonsSelected.show();
+		downloadButton.show();
 
 	}).catch((err) => {
 		showWarning(err);
