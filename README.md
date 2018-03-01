@@ -1,7 +1,6 @@
 # KULeuven Toledo Attachment Downloader (unofficial)
 
 This is a Firefox and Chrome extension that makes it easy to download all attachments on a course page in one click.
-The current version does not go into subdirectories.
 
 ## Installation
 ### Firefox
